@@ -1,16 +1,28 @@
-import Image from "next/image";
+"use client";
+
+import CreateTicketButton from "@/components/tickets/create-button";
+import TicketsTable from "@/components/tickets/table";
+import { useTicketsQuery } from "@/lib/hooks/queries/tickets";
+import { mockTickets } from "@/lib/tickets.mock";
+import Ticket from "@/lib/types/ticket";
 
 export default function Home() {
+  const { data: tickets, error: ticketsQueryError } = useTicketsQuery();
+
+  const handleTicketClick = (ticket: Ticket) => alert(ticket.id);
+
+  if (ticketsQueryError) {
+    return <div>Failed to load tickets.</div>;
+  }
+
+  if (!tickets) {
+    return <div>Loading tickets...</div>;
+  }
+
   return (
-    <div className="h-full bg-gray-900 text-white p-5">
-      <Image
-        className="mb-3"
-        src="/logo-digital-nest.png"
-        alt="Digital NEST logo"
-        width={30}
-        height={30}
-      />
-      <p>Welcome back to Web Development!</p>
-    </div>
+    <>
+      <CreateTicketButton />
+      <TicketsTable tickets={tickets} />;
+    </>
   );
 }
