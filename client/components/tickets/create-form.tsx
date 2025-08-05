@@ -109,8 +109,73 @@ export default function CreateTicketForm({ onDismiss }: CreateTicketFormProps) {
   return (
     <div className="bg-gray-50 p-3 text-sm">
       <h2 className="text-lg font-bold mb-2">Create Ticket</h2>
-      <form onSubmit={() => {}}>
-        {/* Your form code here */}
+      <form onSubmit={handleFormSubmit}>
+        <FormTextInput
+          className="mb-2"
+          icon={<LetterTextIcon width={16} />}
+          label="Title"
+          value={ticketTitle}
+          onChange={handleFormChanged}
+          placeholder="Ticket Title"
+          required
+        />
+        <FormTextInput
+          className="mb-2"
+          icon={<LetterTextIcon width={16} height={16} />}
+          label="Description"
+          value={ticketDescription}
+          onChange={handleFormChanged}
+          placeholder="Ticket Description"
+          required
+        />
+        <div>
+          <FormSelectInput
+            className="mb-2"
+            icon={<Check width={16} />}
+            label="Site"
+            value={ticketSite}
+            options={Sites}
+            onChange={handleFormChanged}
+          />
+        </div>
+        <div>
+          <FormSelectInput
+            className="mb-2"
+            icon={<Check width={16} />}
+            label="Category"
+            value={ticketCategory}
+            options={Categories}
+            onChange={handleFormChanged}
+          />
+        </div>
+        <FormTextInput
+          className="mb-2"
+          icon={<LetterTextIcon width={16} />}
+          label="Assigned To"
+          value={ticketAssignedTo}
+          onChange={handleFormChanged}
+          placeholder="JohnDoe@digitalnest.org"
+          required
+        />
+        <div className="grid grid-cols-2">
+          <FormSelectInput
+            className="mb-2"
+            icon={<Check width={16} />}
+            label="Priority"
+            value={ticketPriority}
+            options={Priorites}
+            onChange={handleFormChanged}
+          />
+          <FormSelectInput
+            className="mb-2"
+            icon={<Check width={16} />}
+            label="Status"
+            value={ticketStatus}
+            options={Statuses}
+            onChange={handleFormChanged}
+          />
+        </div>
+
         <div className="mt-6 flex justify-end gap-3">
           <Button
             type="button"
